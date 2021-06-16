@@ -1,0 +1,36 @@
+{% extends 'core_project/modal_base.html' %}
+{% load static %}
+
+{% block custom_css2 %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'add_photo/css/style.css' %}">
+
+{% endblock custom_css2 %}
+
+{% block pop_up_button %}
+  Add Photo
+{% endblock pop_up_button %} 
+
+{% block modal_title %}
+  Add Photo
+{% endblock modal_title %}
+
+{% block modal_body %}
+  {% comment %} <input type="file" id="img" name="img" accept="image/*"> {% endcomment %}
+  {% comment %} <input type="submit"> {% endcomment %}
+  <div class="drag-area">
+    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <header>Drag & Drop to Upload File</header>
+    <span>OR</span>
+    <button>Browse File</button>
+    <input type="file" hidden>
+  </div>
+
+{% endblock modal_body %}
+
+{% block custom_js %}
+  <script src="{% static 'add_photo/js/all.js' %}"></script>
+  
+  </script>
+{% endblock custom_js %}

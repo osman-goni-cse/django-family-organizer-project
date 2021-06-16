@@ -1,0 +1,24 @@
+{% extends 'core_project/modal_base.html' %}
+
+{% block pop_up_button %}
+  Add To-Do
+{% endblock pop_up_button %}
+
+{% block modal_title %}
+  Add To-Do
+{% endblock modal_title %}
+
+{% block modal_body %}
+  <input class="form-control todo" type="text" value="" placeholder="I want to ">
+
+  <textarea name="" id="" cols="15" rows="5" class="form-control" placeholder="Description of your task"></textarea>
+
+  <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+    <input type="text" placeholder="Due Date" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    </div>
+  </div>
+      
+{% endblock modal_body %}
+

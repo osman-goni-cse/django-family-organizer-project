@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="{% static 'core_project/css/bootstrap.css' %}">
+
+  {% block custom_css %}
+    
+  {% endblock custom_css %}
+
+  {% comment %} <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script> {% endcomment %}
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  
+
+  <title>Family Organizer</title>
+</head>
+<body>
+
+  {% block content %}
+  
+  {% endblock content %}
+
+  <script src="{% static 'core_project/js/jquery.js' %}"></script>
+  <script src="{% static 'core_project/js/popper.js' %}"></script>
+  <script src="{% static 'core_project/js/bootstrap.js' %}"></script>
+
+  {% block custom_js_base %}
+    
+  {% endblock custom_js_base %}
+  
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% extends 'core_project/base.html' %}
+{% load static %}
+
+{% block custom_css %}
+  <link rel="stylesheet" href="{% static 'core_project/css/style.css' %}">
+{% endblock custom_css %}
+
+{% block content %}
+  
+  <input type="checkbox" id="check">
+  <!-- header area start -->
+  
+  <header>
+    <label for="check">
+      <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left">
+      <h3>Family <span>Wall</span></h3>
+    </div>
+    <div class="right">
+      <p color="red">{{form.as_p}}</p>
+      <a href="{% url 'logout' %}" class="logout">Logout</a>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <center>
+      <img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="profile image" class="profile">
+      <h4>Osman</h4>
+    </center>
+    <a href="#"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="{% url 'calendar' %}"><i class="fas fa-calendar-day"></i><span>Calendar</span></a>
+    <a href="#"><i class="far fa-list-alt"></i><span>Lists</span></a>
+    <a href="#"><i class="fas fa-utensils"></i><span>Meal Planner</span></a>
+    <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
+    <a href="#"><i class="far fa-comment-alt"></i><span>Messages</span></a>
+    <a href="#"><i class="fa fa-sliders-h" aria-hidden="true"></i><span>Settings</span></a>
+  </div>
+
+  {% comment %} eikan teke post box er code suru {% endcomment %}
+
+  <div class="container_for_post">
+
+    <table>
+      <tbody>
+        <tr>
+        
+          <td><img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="profile image"></td>
+        
+
+        <form action="{% url 'posts:main-post-view' %}" method="POST" enctype="multipart/form-data">
+
+          {% csrf_token %}
+  
+
+          <td><textarea type = "text" name="text" id="" placeholder="What's on your mind?" maxlength="3000"></textarea>
+          <!-- <button type="submit">POST</button> -->
+          <div class="content">
+
+            <a href="{% url 'add_photo' %}"><i class="fas fa-camera" style="color: #5d9ff3;"></i><span>Add Photo</span></a>
+
+            {% comment %} eita modal er jonno <a href="#" data-toggle="modal" data-target="#exampleModal" ><i class="fas fa-camera" style="color: #5d9ff3;"></i><span>Add Photo</span></a> {% endcomment %}
+
+
+            <a href="{% url 'pop_up_event' %}"><i class="fas fa-calendar-day" style="color: #F26D6D;"></i><span>Add Event</span></a>
+
+
+            <a href="{% url 'add_todo' %}"><i class="fas fa-check-square" style="color: #2DC995;"></i><span>Add To-Do</span></a>
+            
+            
+            <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt" style="color: #89C92D;"></i><span>Add Location</span></a>
+          </div>
+          <button type='submit' name="submit_p_form" class="">Send</button>
+        </form>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+  
+
+{% endblock content %}

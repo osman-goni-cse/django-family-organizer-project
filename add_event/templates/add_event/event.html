@@ -1,0 +1,29 @@
+{% extends 'core_project/modal_base.html' %}
+
+{% block pop_up_button %}
+  Add Event
+{% endblock pop_up_button %}
+
+{% block modal_title %}
+  New Event
+{% endblock modal_title %}
+
+{% block modal_body %}
+  <input class="form-control event"type="text" value="" placeholder="Event Title">
+
+      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+        <input type="text" placeholder="From" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
+      </div>
+      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+        
+        <input type="text" placeholder="To" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
+        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+
+          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+        </div>
+      </div>
+{% endblock modal_body %}
+
