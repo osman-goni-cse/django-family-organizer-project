@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Dos</title>
+  <link rel="stylesheet" href="{% static 'posts/css/event.css' %}">
+  <link rel="stylesheet" href="{% static 'posts/css/todo.css' %}">
+  <style>
+    
+  </style>
+</head>
+<body>
+  {% include 'core_project/sidebar.html' %}
+  <div class="Cover">
+    <img src="{% static 'posts/images/clipboard_list.jpg' %}" alt="ToDo List"  style="margin-top:5%;margin-left:20%">
+  </div>
+
+  {% for x in post_details %}
+    {% if x.todo_title %}
+    
+      <div class="event-container">
+        <div class="event" style="margin-left:20%">
+          <div class="event-left">
+            <div class="event-date">
+              <div class="date">{{x.todo_date}}</div>
+              {% comment %} <div class="month">Nov</div> {% endcomment %}
+            </div>
+          </div>
+
+          <div class="event-right">
+            <h3 class="event-title">{{x.todo_title}}</h3>
+
+            <div class="event-description">
+              {{x.todo_description}}
+            </div>
+
+            {% comment %} <div class="event-timing">
+              <img src="images/time.png" alt="" /> 10:00 am
+            </div> {% endcomment %}
+          </div>
+        </div>
+    {% endif %}
+  {% endfor %}
+</body>
+</html>

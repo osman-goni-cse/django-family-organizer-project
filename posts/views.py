@@ -1,118 +1,131 @@
+from posts.forms import PostForm
+from .models import Post, AddMember
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from .models import Post, Like
-from profiles.models import Profile
-from .forms import PostModelForm, CommentModelForm
-from django.views.generic import UpdateView, DeleteView
+import datetime
+
+# add member
+from django.contrib.auth.models import User
 from django.contrib import messages
-from django.http import JsonResponse
+import uuid
+from django.conf import settings
+from django.core.mail import message, send_mail
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.loader import render_to_string
+
+
 # Create your views here.
 
-@login_required
-def post_comment_create_and_list_view(request):
-    qs = Post.objects.all()
-    profile = Profile.objects.get(user=request.user)
+def post(request):
+  print(request.method)
 
-    # initials
-    p_form = PostModelForm()
-    c_form = CommentModelForm()
-    post_added = False
+  evnt_st_dt = datetime.datetime.now()
+  evnt_st_month = "Jand"
+  evnt_ed_dt = datetime.datetime.now()
+  todo_dt = datetime.datetime.now()
 
-    profile = Profile.objects.get(user=request.user)
+  if request.method == 'POST':
+    form = PostForm(request.POST, request.FILES)
 
-    if 'submit_p_form' in request.POST:
-    # if request.method == 'POST':
-        print(request.POST)
-        p_form = PostModelForm(request.POST, request.FILES)
-        print("p_form", p_form)
-        if p_form.is_valid():
-            instance = p_form.save(commit=False)
-            instance.author = profile
-            instance.save()
-            p_form = PostModelForm()
-            post_added = True
+    print("POST request asce")
+    if form.is_valid():
+      form.save()
+      evnt_st_dt = form.cleaned_data['event_start_date']
+      evnt_st_month = evnt_st_dt.strftime("%B")
+      evnt_st_dt = evnt_st_dt.strftime('%Y-%B-%d %H:%M:%S')
+      print("strftime ", evnt_st_dt)
+      
+      evnt_st_dt = datetime.datetime.strptime(str(evnt_st_dt), '%Y-%B-%d %H:%M:%S')
 
-    if 'submit_c_form' in request.POST:
-        c_form = CommentModelForm(request.POST)
-        if c_form.is_valid():
-            instance = c_form.save(commit=False)
-            instance.user = profile
-            instance.post = Post.objects.get(id=request.POST.get('post_id'))
-            instance.save()
-            c_form = CommentModelForm()
+      print("strptime ", evnt_st_dt)
+      # print(evnt_st_dt.day)
+      # print(evnt_st_dt.month)
+      # print(evnt_st_dt.year)
+      
+      evnt_ed_dt = form.cleaned_data['event_end_date']
+      # evnt_ed_dt = datetime.datetime.strptime(str(evnt_ed_dt), '%Y-%m-%d %H:%M:%S.s')
+      todo_dt = form.cleaned_data['todo_date']
+      # todo_dt = datetime.datetime.strptime(str(todo_dt), '%Y-%m-%d %H:%M:%S.s')
+      
+    else:
+      print("form is invalid ", form.errors)
+  
+  form = PostForm()
+  post_details = Post.objects.all()
+
+  # myForm.fields['description']
+  
+  print(evnt_st_dt)
+
+  print("view function ee asce")
+  context = {
+    'form':form,
+    'post_details':post_details,
+    'evnt_st_dt':evnt_st_dt,
+    'evnt_ed_dt':evnt_ed_dt,
+    'todo_dt':todo_dt,
+    'evnt_st_month':evnt_st_month,
+  }
+
+  return render(request, 'posts/index.html', context)
 
 
-    context = {
-        'qs': qs,
-        'profile': profile,
-        'p_form': p_form,
-        'c_form': c_form,
-        'post_added': post_added,
-    }
-    print("ekane asce to")
-    return render(request, 'posts/main.html', context)
-    # return render(request, 'core_project/home.html', context)
 
-@login_required
-def like_unlike_post(request):
-    user = request.user
-    if request.method == 'POST':
-        post_id = request.POST.get('post_id')
-        post_obj = Post.objects.get(id=post_id)
-        profile = Profile.objects.get(user=user)
+# member add
 
-        if profile in post_obj.liked.all():
-            post_obj.liked.remove(profile)
-        else:
-            post_obj.liked.add(profile)
+def member_invite(request):
+  print("member invite ee asce")
+  if request.method == 'POST':
+    username = request.POST.get('username')
+    email = request.POST.get('email')
 
-        like, created = Like.objects.get_or_create(user=profile, post_id=post_id)
+    print("email: ",email)
+    try:
+      if User.objects.filter(username = username).first():
+        messages.error(request, 'Username is taken')
+        return redirect('/posts')
 
-        if not created:
-            if like.value=='Like':
-                like.value='Unlike'
-            else:
-                like.value='Like'
-        else:
-            like.value='Like'
+      if User.objects.filter(email = email).first():
+        messages.error(request, 'Email is taken')
+        print("Email is taken")
+        return redirect('/posts')
+      
+      user_obj = User(username=username, email=email)
+      user_obj.save()
 
-            post_obj.save()
-            like.save()
+      auth_token = str(uuid.uuid4)
+      profile_obj = AddMember.objects.create(user=user_obj, auth_token=auth_token)
 
-        # data = {
-        #     'value': like.value,
-        #     'likes': post_obj.liked.all().count()
-        # }
+      profile_obj.save()
 
-        # return JsonResponse(data, safe=False)
-    return redirect('posts:main-post-view')
+      print("Email send er ager line")
+      send_mail_after_registration(email, auth_token)
+      print("Email send howar kota")
+      messages.success(request, 'Congratulations, your invitation was successfully sent!')
+      return redirect('/posts')
+    except Exception as e:
+      print(e)
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
-    model = Post
-    template_name = 'posts/confirm_del.html'
-    success_url = reverse_lazy('posts:main-post-view')
-    # success_url = '/posts/'
 
-    def get_object(self, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        obj = Post.objects.get(pk=pk)
-        if not obj.author.user == self.request.user:
-            messages.warning(self.request, 'You need to be the author of the post in order to delete it')
-        return obj
+  return render(request, 'posts/index.html')
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
-    form_class = PostModelForm
-    model = Post
-    template_name = 'posts/update.html'
-    success_url = reverse_lazy('posts:main-post-view')
+def send_mail_after_registration(email, token):
+  subject = 'Please Join me on family organizer Website'
+  message = F"Hi,It's a private and safe place where we can share pictures and videos and organize everyday life. http://127.0.0.1:8000"
+  # message = render_to_string('accounts/email.html', {'token': token})
+  email_from = settings.EMAIL_HOST_USER
+  recipient_list = [email]
+  send_mail(subject, message, email_from, recipient_list)
 
-    def form_valid(self, form):
-        profile = Profile.objects.get(user=self.request.user)
-        if form.instance.author == profile:
-            return super().form_valid(form)
-        else:
-            form.add_error(None, "You need to be the author of the post in order to update it")
-            return super().form_invalid(form)
-    
+def token_send(request):
+  return render(request, 'posts/token_send.html') 
+
+
+def listing_todo(request):
+  post_details = Post.objects.all()
+
+  context = {
+    'post_details':post_details,
+  }
+
+  return render(request, 'posts/todo_list.html', context)

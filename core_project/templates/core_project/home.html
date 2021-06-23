@@ -18,7 +18,7 @@
       <h3>Family <span>Wall</span></h3>
     </div>
     <div class="right">
-      <p color="red">{{form.as_p}}</p>
+      {% comment %} <p color="red">{{form.as_p}}</p> {% endcomment %}
       <a href="{% url 'logout' %}" class="logout">Logout</a>
     </div>
   </header>
@@ -47,10 +47,6 @@
         
           <td><img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="profile image"></td>
         
-
-        <form action="{% url 'posts:main-post-view' %}" method="POST" enctype="multipart/form-data">
-
-          {% csrf_token %}
   
 
           <td><textarea type = "text" name="text" id="" placeholder="What's on your mind?" maxlength="3000"></textarea>
@@ -71,7 +67,6 @@
             <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt" style="color: #89C92D;"></i><span>Add Location</span></a>
           </div>
           <button type='submit' name="submit_p_form" class="">Send</button>
-        </form>
         </td>
         </tr>
       </tbody>

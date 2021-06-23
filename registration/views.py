@@ -35,12 +35,14 @@ def user_login(request):
             login(request, user)
             messages.success(request, 'Logged in Successfully !!')
             # return HttpResponseRedirect('/home/')
-            return render(request, 'core_project/home.html', {'form':form})
+            return HttpResponseRedirect('/posts/')
+            # return render(request, 'core_project/home.html', {'form':form})
     else:
       form = LoginForm()
     return render(request, 'registration/login.html', {'form':form})
   else:
-    return HttpResponseRedirect('/home/')
+    # return HttpResponseRedirect('/home/')
+    return HttpResponseRedirect('/posts/')
 
 
 def user_logout(request):

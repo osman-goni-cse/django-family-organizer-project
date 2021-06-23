@@ -48,9 +48,9 @@ INSTALLED_APPS = [
     'crispy_forms', # map er jonno
     'event_calendar',
 
-    # social project teke
+    'tempus_dominus', # date picker er jonno
     'posts',
-    'profiles',
+   
 ]
 
 MIDDLEWARE = [
@@ -77,10 +77,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 
-                # social project teke
-                
-                # 'profiles.context_processors.profile_pic',
-                # 'profiles.context_processors.invatations_received_no',
             ],
         },
     },
@@ -139,12 +135,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [STATIC_DIR]
 
 # social project teke
 
 
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '170132.cse@student.just.edu.bd'
+EMAIL_HOST_PASSWORD = 'kjvysfyctzkwfths'
+EMAIL_PORT = 587

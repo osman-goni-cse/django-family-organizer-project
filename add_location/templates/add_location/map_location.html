@@ -17,34 +17,37 @@
 <body>
     {% comment %} {% include 'core_project/home.html' %} {% endcomment %}
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    {% include 'core_project/sidebar.html' %}
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-left:40%;margin-right:40%">
         {% comment %} <a class="navbar-brand" href="#">Geo KenBroTech</a> {% endcomment %}
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        {% comment %} <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> {% endcomment %}
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+        <div class="" id="navbarSupportedContent">
             {% comment %}
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'add_location' %}">Map <span class="sr-only">(current)</span></a>
                 </li>
                  <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                </li> {% endcomment %}
+                </li> 
             </ul> 
+            {% endcomment %}
             <form class="form-inline my-2 my-lg-0" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="btn btn-outline-success my-2 my-sm-0 mx-3" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 mx-3" type="submit" style="width:auto;height:auto">Search</button>
             </form>
         </div>
     </nav>
     <!--End Navbar-->
     <div class="container">
         <div class="row mt-4">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-10 offset-md-1" style="margin-left:15%">
                 {{ m|safe }}
             </div>
         </div>

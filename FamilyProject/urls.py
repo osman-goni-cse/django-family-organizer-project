@@ -46,10 +46,9 @@ urlpatterns = [
     path('add_event/', views.add_event, name='add_event'),
     path('update/', views.update, name='update'),
     path('remove/', views.remove, name='remove'),
-
-    # social project teke
-    path('profiles/', include('profiles.urls', namespace='profiles')),
-    path('posts/', include('posts.urls', namespace='posts')),
+    
+    path('posts/', include('posts.urls')),
+    
 ]
 
 # social project teke

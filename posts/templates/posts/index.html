@@ -1,0 +1,514 @@
+{% extends 'core_project/base.html' %}
+{% load static %}
+
+  {% block custom_css %}
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    {% comment %} <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> {% endcomment %}
+    {% comment %} For icon {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> {% endcomment %}
+
+    {% comment %} semantic ui {% endcomment %}
+     <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    {# Include Bootstrap 4 and jQuery #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    {% comment %} custom css {% endcomment %}
+    
+
+    {% comment %} Drag and Drop {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css"integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA==" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="{% static 'posts/css/add_photo.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/stylish.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/event.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/post.css' %}">
+
+  {% endblock custom_css %}
+
+  {% block media_set %}
+    
+    {{form.media}}
+  {% endblock media_set %}
+
+
+{% block content %}
+
+  <input type="checkbox" id="check">
+  
+  <header>
+    <label for="check">
+      <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left">
+      <h3>Family <span>Wall</span></h3>
+    </div>
+    <div class="mid">
+      
+    </div>
+    <div class="right">
+      <a href="{% url 'logout' %}" class="logout">Logout</a>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <center>
+      <img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="profile image" class="profile">
+      <h4>{{request.user}}</h4>
+    </center>
+    <a href="{% url 'post' %}"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="{% url 'calendar' %}"><i class="fas fa-calendar-day"></i><span>Calendar</span></a>
+    <a href="{% url 'todo_list' %}"><i class="far fa-list-alt"></i><span>Lists</span></a>
+    <a href="#"><i class="fas fa-utensils"></i><span>Meal Planner</span></a>
+    <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
+    <a href="#"><i class="far fa-comment-alt"></i><span>Messages</span></a>
+    <a href="#"><i class="fa fa-sliders-h" aria-hidden="true"></i><span>Settings</span></a>
+  </div>
+
+  {% comment %} {% include 'core_project/sidebar.html' %} {% endcomment %}
+
+  
+
+  <center>
+
+  
+  
+  {% comment %} <a href="#"><i class="fas fa-user-plus fa-3x" data-toggle="modal" data-target="#myModal"></i></a> {% endcomment %}
+
+
+  {% if messages %}
+    {% for message in messages %}
+      
+      <p class="text-danger">{{message}}</p>
+    {% endfor %}
+  {% endif %}
+
+  
+  {% comment %}
+  <img class="ui avatar image" src={{obj.author.avatar.url}}> 
+   {{ obj.author.user }} - {{ obj.created|timesince}} ago {% endcomment %}
+
+      
+        <form action="" method="POST" id="modal_details" enctype="multipart/form-data" class="dropzone">
+        
+          {% csrf_token %}
+
+           {{form.text}} <br> 
+        
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">
+              <i class="fas fa-camera"><span>Add Photo</span></i>
+          </button>
+        
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Add Photo
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {% comment %} <div class="drag-area ">
+                  <div class="icon" ><i class="fas fa-cloud-upload-alt"></i></div>
+                  <header>Drag & Drop to Upload File</header>
+
+                  <span>OR</span>
+                  
+                  <button> Browse File </button> 
+                  <input type="file" hidden>
+                  {{form.photo}}
+                  
+                  
+                </div> {% endcomment %}
+
+
+                <div class="form-group">
+                
+                    <div class="file-input drag-area">
+                      
+                        <label class=" text-muted text-center" for="id_image"> 
+                        <div class="icon">
+                          <i class="fas fa-cloud-upload-alt"></i>
+                          
+                        </div>            
+                          {% comment %} <header id="elahi">Drag & Drop to Upload File</header> {% endcomment %}
+
+                          <span>Drag & Drop to Upload File</span> <br>
+
+                          <span>OR</span>
+                        </label>
+                        {{form.photo}}
+                    </div>
+                  
+                </div> 
+                
+                <!-- ekane ses -->
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button onclick="form_submit()" class="btn btn-primary" >Share</button>
+                {% comment %} <input type="submit" class="btn btn-default" value="Share"> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" data-whatever="@fat">
+          <i class="far fa-calendar-alt"><span>Add Event</span></i>
+        </button>
+        
+          <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title  text-center w-100" id="exampleModalLabel">
+                  New Event
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{form.event_title}} <br> 
+                {% comment %} <span>From:</span>
+                {{form.event_start_date}} <br>
+                <span>To:</span>
+                {{form.event_end_date}} <br> {% endcomment %}
+                <div class="form-row">
+                  <div class="col">
+                    <b>From:</b> 
+                    {{form.event_start_date}}
+                  </div>
+                  <div class="col">
+                    <b>To:</b>
+                    {{form.event_end_date}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {% comment %} <input type="submit" class="btn btn-primary" value="Share"></input> {% endcomment %}
+                <button onclick="form_submit()" class="btn btn-primary" >Share</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@fat">
+          <i class="fas fa-check-square"><span>Add To-Do</span></i>
+        </button>
+        
+          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">
+                  Add To-Do
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {{form.todo_title}} 
+                {{form.todo_description}} <br>
+                <div class="form-row">
+                  <div class="col">
+                    <b>Due date</b> 
+                    {{form.todo_date}}
+                  </div>
+                  <div class="col"></div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {% comment %} <input type="submit" class="btn btn-primary" value="Share"></input> {% endcomment %}
+                <button onclick="form_submit()" class="btn btn-primary" >Share</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button onclick="form_submit()" class="btn btn-primary" >Share</button>
+
+        
+   
+      </form>
+      <form action="{% url 'member_invite' %}" method="post">
+          {% csrf_token %}
+          <div class="member" style="color: blue;margin-top: -58px;margin-left: 500px;">
+            <i class="fas fa-user-plus fa-2x" data-toggle="modal" data-target="#exampleModal0" ></i>
+        
+          <div class="modal fade" id="exampleModal0" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">
+                  Add Member
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                {% comment %} <label for="exampleInputEmail1">Email address</label> {% endcomment %}
+                <input type="text" name="username" class="form-control form-control-sm" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="username"> <br>
+                <input type="email" name="email"  class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+              </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                {% comment %} <input type="submit" class="btn btn-primary" value="Share"></input> {% endcomment %}
+                <button onclick="form_submit()" class="btn btn-primary" >Invite</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </form>
+      
+</center>
+
+</div>
+
+
+
+  <br>
+
+<div class="post_margin" style="margin-left:19%">
+  <div class="card mx-auto">
+        <div class="card-body">
+          {% for x in post_details %}
+            {% if x.text %}
+              <p class="card-text">{{x.text}}</p>
+            {% endif %}
+
+            {% if x.photo %}
+              <img src="{{x.photo.url}}" class="card-img-top content-image" alt="" width="50px">
+            {% endif %}
+
+
+            {% if x.event_title %}
+
+              <div class="event-container" style="margin-right:25%">
+                <div class="event">
+                  <div class="event-left">
+                    <div class="event-date">
+                      <div class="date">{{x.event_start_date}}</div>
+                    </div>
+                  </div>
+
+                  <div class="event-right">
+                    <h3 class="event-title">{{x.event_title}}</h3>
+
+                    <div class="event-description">
+                      From {{x.event_start_date}} To {{x.event_end_date}}
+                    </div>
+
+                    </div> 
+                  </div>
+                </div>
+              </div>
+
+            {% endif %} 
+
+            {% if x.todo_title %}
+              
+
+              {% comment %} {{request.user}} has updated the list To-Dos {% endcomment %}
+            <a href="{% url 'todo_list' %}">
+              <div class="event-container" style="margin-right:20%">
+                <div class="event">
+                  <div class="event-left">
+                    <div class="event-date">
+                      <div class="date"><i class="fas fa-clipboard-list fa-3x mx-auto" ></i></div>
+                    </div>
+                  </div>
+
+                  <div class="event-right">
+                    <h3 class="event-title"><p style="font-weight:bold">To-Dos</p></h3>
+
+                    <div class="event-description">
+                      2 items remaining
+                    </div>
+
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </a>
+
+              {% comment %} <a href="{% url 'todo_list' %}">
+                <table class="">
+                <tbody>
+                  <tr>
+                    <td class="" style="text-align:center;">
+                      <i class="fas fa-clipboard-list fa-3x" style="margin-top:20px"></i>
+                      
+                    </td>
+                    <td class="" style="">
+                      <p style="font-weight:bold">To-Dos</p>
+                      <p style="color:#a2a2a2">2 items remaining</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </a> {% endcomment %}
+              
+
+            {% endif %} 
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <div class="ui centered cards">
+    <div class="post_section">
+    {% for x in post_details %}
+      {% if x.text %}
+        <p class="card-text">{{x.text}}</p>
+      {% endif %}
+
+      {% if x.photo %}
+        <img src="{{x.photo.url}}" class="card-img-top content-image" alt="" width="50px">
+      {% endif %}
+
+
+      {% if x.event_title %}
+
+        <div class="event-container">
+          <div class="event">
+            <div class="event-left">
+              <div class="event-date">
+                <div class="date">{{x.event_start_date}}</div>
+              </div>
+            </div>
+
+            <div class="event-right">
+              <h3 class="event-title">{{x.event_title}}</h3>
+
+              <div class="event-description">
+                From {{x.event_start_date}} To {{x.event_end_date}}
+              </div>
+
+              </div> 
+            </div>
+          </div>
+        </div>
+
+      {% endif %} 
+
+      {% if x.todo_title %}
+        
+
+        {{request.user}} has updated the list To-Dos
+        <a href="{% url 'todo_list' %}">
+          <table class="">
+          <tbody>
+            <tr>
+              <td class="" style="text-align:center;">
+                <i class="fas fa-clipboard-list fa-3x" style="margin-top:20px"></i>
+                
+              </td>
+              <td class="" style="">
+                <p style="font-weight:bold">To-Dos</p>
+                <p style="color:#a2a2a2">2 items remaining</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </a>
+        
+
+      {% endif %} 
+
+      {% endfor %}
+  </div>
+  </div> {% endcomment %}
+
+  {% comment %} eitar jonno sidebar kaj kore na {% endcomment %}
+  {% comment %} <div class="row">
+     <div class="col-sm-3">
+      <div class="card" hidden>
+        <div class="card-body">
+          
+        </div>
+      </div>
+     </div>
+     <div class="col-sm-9">
+      <div class="card">
+        <div class="card-body">
+          {% for x in post_details %}
+            
+          {% endfor %}
+        </div>
+      </div>
+     </div>
+  </div> {% endcomment %}
+
+{% endblock content %}
+  
+  {% block custom_js_base %}
+    {% comment %} <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> {% endcomment %}
+
+  <script>
+    function form_submit() {
+      document.getElementById("modal_details").submit();
+    }
+  </script>
+
+
+  <script src="{% static 'posts/js/add_photo.js' %}"></script>
+  
+
+  {% endblock custom_js_base %}
+
+</body>
+</html>
