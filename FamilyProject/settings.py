@@ -33,12 +33,12 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!cxc+zaymk7#hk@+5dg)$0*v_u7cuwwcxg-dtn*g4xwi0^f$+)'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["familyassistance.herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -69,6 +69,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -155,6 +156,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [STATIC_DIR]
 
+STATIC_ROOT = BASE_DIR / 'static'
+
 # social project teke
 
 
@@ -171,6 +174,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '170132.cse@student.just.edu.bd'
-EMAIL_HOST_PASSWORD = 'kjvysfyctzkwfths'
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
