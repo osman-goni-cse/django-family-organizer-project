@@ -2,7 +2,7 @@ from posts.forms import PostForm
 from .models import Post, AddMember
 from django.shortcuts import render, redirect
 import datetime
-
+from django.utils import timezone
 # add member
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -58,6 +58,14 @@ def post(request):
   print(evnt_st_dt)
 
   print("view function ee asce")
+  
+  num_of_task = 0
+
+  for task in post_details:
+    if task.todo_title:
+      num_of_task += 1
+
+
   context = {
     'form':form,
     'post_details':post_details,
@@ -65,6 +73,7 @@ def post(request):
     'evnt_ed_dt':evnt_ed_dt,
     'todo_dt':todo_dt,
     'evnt_st_month':evnt_st_month,
+    'num_of_task':num_of_task,
   }
 
   return render(request, 'posts/index.html', context)
@@ -123,9 +132,61 @@ def token_send(request):
 
 def listing_todo(request):
   post_details = Post.objects.all()
+  form = PostForm()
+
 
   context = {
     'post_details':post_details,
+    'form':form,
   }
 
   return render(request, 'posts/todo_list.html', context)
+
+
+# new update
+def updateTask(request, pk):
+  task = Post.objects.get(id=pk)
+  post_details = Post.objects.all()
+
+  print('update er pk ', pk)
+  form = PostForm(instance=task)
+
+  context = {
+    'form':form,
+    'post_details':post_details,
+  }
+
+  print("UpdateTask view function call hoice + ", request.method)
+
+  if request.method == 'POST':
+    form = PostForm(request.POST, request.FILES,instance=task)
+    print("updated data niye asci")
+    print(request.POST) 
+    try:
+      # request.POST.event_start_date = timezone.now()
+      
+      if form.is_valid():
+        form.save()
+        # print(form.cleaned_data['todo_title'])
+        # print(form.cleaned_data['todo_description'])
+        return redirect('/posts/todo_list')
+      else:
+        print('data invalid')
+        print(form.errors)
+    except Exception as e:
+      print(e)
+
+  return render(request, 'posts/update_task.html', context)
+
+def deleteTask(request, pk):
+  item = Post.objects.get(id=pk)
+
+  if request.method == 'POST':
+    item.delete()
+    return redirect('/posts/todo_list')
+  
+  context = {
+    'item':item,
+  }
+
+  return render(request, 'posts/delete_task.html', context)

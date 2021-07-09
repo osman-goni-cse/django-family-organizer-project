@@ -10,12 +10,12 @@ class Post(models.Model):
   photo = models.ImageField(upload_to="myimage", blank=True)
 
   event_title = models.TextField(max_length=5000, blank=True)
-  event_start_date = models.DateTimeField(blank=True, default=timezone.now())
-  event_end_date = models.DateTimeField(blank=True, default=timezone.now())
+  event_start_date = models.DateTimeField(blank=True, null=True)
+  event_end_date = models.DateTimeField(blank=True, null=True)
 
   todo_title = models.TextField(max_length=5000, blank=True)
   todo_description = models.TextField(max_length=5000, blank=True)
-  todo_date = models.DateTimeField(blank=True, default=timezone.now())
+  todo_date = models.DateTimeField(blank=True, null=True)
 
   created = models.DateTimeField(auto_now_add=True)
 

@@ -1,5 +1,6 @@
+/* 
+ager code eigula
 .todoCover {
-  /* background-image: url('posts/images/check_list.jpg'); */
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -8,4 +9,18 @@
 
 .event-container {
   margin-left: 20%;
+} 
+*/
+.btn-outline-warning {
+  margin-bottom: 2%;
+  margin-top: 2%;
+  /* position: relative;
+  left: 30%; */
+}
+
+.btn-outline-danger {
+  margin-bottom: 2%;
+  margin-top: 2%;
+  /* position: relative;
+  left: 31%; */
 }

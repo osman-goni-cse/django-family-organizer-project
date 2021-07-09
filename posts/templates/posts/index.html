@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="{% static 'posts/css/stylish.css' %}">
     <link rel="stylesheet" href="{% static 'posts/css/event.css' %}">
     <link rel="stylesheet" href="{% static 'posts/css/post.css' %}">
+    <link rel="stylesheet" href="{% static 'posts/css/style-post.css' %}">
 
   {% endblock custom_css %}
 
@@ -84,29 +85,34 @@
     <a href="{% url 'post' %}"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="{% url 'calendar' %}"><i class="fas fa-calendar-day"></i><span>Calendar</span></a>
     <a href="{% url 'todo_list' %}"><i class="far fa-list-alt"></i><span>Lists</span></a>
+    <a href="{% url 'index' %}"><i class="far fa-address-book"></i><span>Contact Book</span></a>
+
+    
     <a href="#"><i class="fas fa-utensils"></i><span>Meal Planner</span></a>
     <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
     <a href="#"><i class="far fa-comment-alt"></i><span>Messages</span></a>
+    
     <a href="#"><i class="fa fa-sliders-h" aria-hidden="true"></i><span>Settings</span></a>
   </div>
 
   {% comment %} {% include 'core_project/sidebar.html' %} {% endcomment %}
 
-  
+  {% for message in messages %}
+    <div class="container-fluid p-0">
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    </div>
+  {% endfor %}
 
   <center>
 
   
   
   {% comment %} <a href="#"><i class="fas fa-user-plus fa-3x" data-toggle="modal" data-target="#myModal"></i></a> {% endcomment %}
-
-
-  {% if messages %}
-    {% for message in messages %}
-      
-      <p class="text-danger">{{message}}</p>
-    {% endfor %}
-  {% endif %}
 
   
   {% comment %}
@@ -312,26 +318,50 @@
 
 </div>
 
+{% comment %} notun code eita {% endcomment %}
 
+{% for x in post_details %}
+  <section class="main-content">
+		<div class="container-post">
 
-  <br>
+			<div class="row">
+				<div class="col-sm-6 offset-sm-3">
+					<div class="post-block">
+						<div class="d-flex justify-content-between">
+							<div class="d-flex mb-3">
+								<div class="mr-2">
+									<a href="#!" class="text-dark"><img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="User" class="author-img"></a>
+								</div>
+								<div>
+									<h5 class="mb-0"><a href="#!" class="text-dark">{{request.user}}</a></h5>
+									<p class="mb-0 text-muted">{{ x.created|timesince}} ago</p>
+                  
+								</div>
+							</div>
+							<div class="post-block__user-options">
+								<a href="#!" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">
+											<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+									<a class="dropdown-item text-dark" href="#!"><i class="fas fa-pencil-alt mr-1"></i>Edit</a>
+									<a class="dropdown-item text-danger" href="#!"><i class="fa fa-trash mr-1"></i>Delete</a>
+								</div>
+							</div>
+						</div>
+						<div class="post-block__content mb-2">
+							{% if x.text %}
+                <p>{{x.text}}</p>
+              {% endif %}
+							
+              {% if x.photo %}
+                <img src="{{x.photo.url}}" alt="Content img">
+                
+              {% endif %}
 
-<div class="post_margin" style="margin-left:19%">
-  <div class="card mx-auto">
-        <div class="card-body">
-          {% for x in post_details %}
-            {% if x.text %}
-              <p class="card-text">{{x.text}}</p>
-            {% endif %}
+              {% if x.event_title %}
 
-            {% if x.photo %}
-              <img src="{{x.photo.url}}" class="card-img-top content-image" alt="" width="50px">
-            {% endif %}
-
-
-            {% if x.event_title %}
-
-              <div class="event-container" style="margin-right:25%">
+              <div class="event-container" style="margin-right:0%">
                 <div class="event">
                   <div class="event-left">
                     <div class="event-date">
@@ -355,8 +385,105 @@
 
             {% if x.todo_title %}
               
+            <a href="{% url 'todo_list' %}">
+              <div class="event-container" style="margin-right:0%">
+                <div class="event">
+                  <div class="event-left">
+                    <div class="event-date">
+                      <div class="date"><i class="fas fa-clipboard-list fa-3x mx-auto" ></i></div>
+                    </div>
+                  </div>
 
-              {% comment %} {{request.user}} has updated the list To-Dos {% endcomment %}
+                  <div class="event-right">
+                    <h3 class="event-title"><p style="font-weight:bold">To-Dos</p></h3>
+
+                    <div class="event-description">
+                      {{num_of_task}} items remaining
+                    </div>
+
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            {% endif %} 
+
+
+						</div>
+						<div class="mb-3">
+							<div class="d-flex justify-content-between mb-2">
+								<div class="d-flex">
+									<a href="#!" class="text-danger mr-2"><span><i class="fa fa-heart"></i></span></a>
+									<a href="#!" class="text-dark mr-2"><span>Like</span></a>
+								</div>
+								<a href="#!" class="text-dark"><span>Share</span></a>
+							</div>
+							<p class="mb-0">Liked by <a href="#!" class="text-muted font-weight-bold">Osman</a> & <a href="#!" class="text-muted font-weight-bold">25 others</a></p>
+						</div>
+						<hr>
+						<div class="post-block__comments">
+							<!-- Comment Input -->
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" placeholder="Add your comment">
+								<div class="input-group-append">
+								  	<button class="btn btn-primary" type="button" id="button-addon2"><i class="fa fa-paper-plane"></i></button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endfor %}
+
+{% comment %}
+
+ager code eita
+
+<br>
+
+<div class="post_margin" style="margin-left:19%">
+  <div class="card mx-auto">
+        <div class="card-body">
+          {% for x in post_details %}
+            {% if x.text %}
+              <p class="card-text">{{x.text}}</p>
+            {% endif %}
+
+            {% if x.photo %}
+              <img src="{{x.photo.url}}" class="card-img-top content-image" alt="" width="50px">
+            {% endif %}
+
+
+            {% if x.event_title %}
+
+              <div class="event-container" style="margin-right:31%">
+                <div class="event">
+                  <div class="event-left">
+                    <div class="event-date">
+                      <div class="date">{{x.event_start_date}}</div>
+                    </div>
+                  </div>
+
+                  <div class="event-right">
+                    <h3 class="event-title">{{x.event_title}}</h3>
+
+                    <div class="event-description">
+                      From {{x.event_start_date}} To {{x.event_end_date}}
+                    </div>
+
+                    </div> 
+                  </div>
+                </div>
+              </div>
+
+            {% endif %} 
+
+            {% if x.todo_title %}
+              
             <a href="{% url 'todo_list' %}">
               <div class="event-container" style="margin-right:20%">
                 <div class="event">
@@ -370,7 +497,7 @@
                     <h3 class="event-title"><p style="font-weight:bold">To-Dos</p></h3>
 
                     <div class="event-description">
-                      2 items remaining
+                      {{num_of_task}} items remaining
                     </div>
 
                     </div> 
@@ -379,32 +506,13 @@
               </div>
             </a>
 
-              {% comment %} <a href="{% url 'todo_list' %}">
-                <table class="">
-                <tbody>
-                  <tr>
-                    <td class="" style="text-align:center;">
-                      <i class="fas fa-clipboard-list fa-3x" style="margin-top:20px"></i>
-                      
-                    </td>
-                    <td class="" style="">
-                      <p style="font-weight:bold">To-Dos</p>
-                      <p style="color:#a2a2a2">2 items remaining</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-            </a> {% endcomment %}
-              
-
             {% endif %} 
 
           {% endfor %}
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   {% comment %} <div class="ui centered cards">
     <div class="post_section">
@@ -507,6 +615,8 @@
 
   <script src="{% static 'posts/js/add_photo.js' %}"></script>
   
+  {% comment %} drop down menu er jonno {% endcomment %}
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   {% endblock custom_js_base %}
 

@@ -1,0 +1,62 @@
+{% extends 'core_project/base.html' %}
+{% load static %}
+  
+  {% block custom_css %}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    {# Include Bootstrap 4 and jQuery #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <style>
+    .center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.item-row{
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+	}
+  </style>
+
+  {% endblock custom_css %}
+
+  {% block media_set %}
+    {# Django Tempus Dominus assets are included in `{{ form.media }}` #}
+    {{ form.media }}
+  {% endblock media_set %}
+
+{% block content %}
+  <form action="" method="POST" >
+	  {% csrf_token %}
+
+    <div class="center-column">
+      <b>Title</b>
+      {{form.todo_title}}
+      <b>Description</b>
+      {{form.todo_description}}
+      <b>Due Date</b>
+      {{form.todo_date}}
+
+      <span hidden>{{form.event_start_date}} </span>
+      <span hidden>{{form.event_end_date}} </span>
+      {% comment %} <button onclick="form_submit()" class="btn btn-primary" >Update</button> {% endcomment %}
+
+      <input type="submit" value="Update" class="btn btn-primary btn-success">
+
+      <button class="btn btn-secondary btn-danger">Cancel</button>
+    </div>
+    
+  </form>
+
+{% endblock content %}

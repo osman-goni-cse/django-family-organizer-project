@@ -1,0 +1,33 @@
+{% extends 'core_project/base.html' %}
+{% load static %}
+
+{% block custom_css %}
+  <style>
+    .center-column{
+      width:600px;
+      margin: 20px auto;
+      padding:20px;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	  }
+  </style>
+{% endblock custom_css %}
+
+{% block content %}
+  <div class="center-column">
+    <p>Are you sure you want to delete <b><i style="text-transform:uppercase">{{item.todo_title}}?</i></b></p>
+
+    <center>
+      
+      <form method="POST" action="">
+        {% csrf_token %}
+
+        <a class="btn btn-sm btn-info" href="{% url 'todo_list' %}" > Cancel</a>
+
+        <input type="submit" name="Confirm"  value="Confirm" class="btn btn-sm btn-danger">
+      </form>
+    </center>
+  </div>
+
+{% endblock content %}

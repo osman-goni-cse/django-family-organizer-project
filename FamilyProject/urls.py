@@ -48,6 +48,7 @@ urlpatterns = [
     path('remove/', views.remove, name='remove'),
     
     path('posts/', include('posts.urls')),
+    path('contacts/', include('add_contact.urls')),
     
 ]
 

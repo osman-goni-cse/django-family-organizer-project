@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"/>
@@ -113,14 +114,58 @@
         });
 
     </script>
+    <link rel="stylesheet" href="{% static 'event_calendar/css/event-calendar.css' %}">
+    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> 
+
+    {% comment %} For icon {% endcomment %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+     
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <body>
 
-<br/>
 {% comment %} <h2 align="center"><a href="#">title</a></h2> {% endcomment %}
-<br/>
-<div class="container">
-    <div id="calendar"></div>
-</div>
+<input type="checkbox" id="check">
+  
+  <header style="margin-top:-68px">
+    <label for="check">
+      <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left">
+      <h3>Family <span>Wall</span></h3>
+    </div>
+    <div class="mid">
+      
+    </div>
+    <div class="right">
+      <a href="{% url 'logout' %}" class="logout">Logout</a>
+    </div>
+  </header>
+
+  <div class="sidebar" style="margin-top:-10px">
+    <center>
+      <img src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="profile image" class="profile">
+      <h4>{{request.user}}</h4>
+    </center>
+    <a href="{% url 'post' %}"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="{% url 'calendar' %}"><i class="fas fa-calendar-alt"></i><span>Calendar</span></a>
+    <a href="{% url 'todo_list' %}"><i class="far fa-list-alt"></i><span>Lists</span></a>
+    <a href="{% url 'index' %}"><i class="far fa-address-book"></i><span>Contact Book</span></a>
+
+    
+    <a href="#"><i class="fas fa-utensils"></i><span>Meal Planner</span></a>
+    <a href="{% url 'add_location' %}"><i class="fas fa-map-marker-alt"></i><span>Map</span></a>
+    <a href="#"><i class="far fa-comment-alt"></i><span>Messages</span></a>
+    
+    <a href="#"><i class="fa fa-sliders-h" aria-hidden="true"></i><span>Settings</span></a>
+  </div>
+
+
+    <div class="container" style="margin-left:20%;margin-top:5%">
+        <div id="calendar"></div>
+    </div>
+
+    <script src="{% static 'event_calendar/js/script-calendar.js' %}"></script>
 </body>
 </html>
