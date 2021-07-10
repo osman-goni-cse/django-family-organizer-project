@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT FamilyProject.wsgi:application
+web:gunicorn FamilyProject.wsgi

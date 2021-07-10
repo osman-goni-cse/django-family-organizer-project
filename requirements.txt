@@ -26,6 +26,7 @@ decorator==5.0.9
 defusedxml==0.7.1
 distlib==0.3.0
 distro==1.4.0
+dj-database-url==0.5.0
 Django==3.2
 django-allauth==0.44.0
 django-betterforms==1.2
@@ -33,6 +34,7 @@ django-ckeditor==5.8.0
 django-crispy-forms==1.9.1
 django-filter==2.4.0
 django-froala-editor==3.2.2
+django-heroku==0.3.1
 django-js-asset==1.2.2
 django-mapbox-location-field==1.5.0
 django-tempus-dominus==5.1.2.14
@@ -65,6 +67,7 @@ PyJWT==2.1.0
 pymongo==3.10.1
 pyparsing==2.4.6
 python-dateutil==2.8.1
+python-decouple==3.4
 python3-openid==3.2.0
 pytoml==0.1.21
 pytz==2021.1
