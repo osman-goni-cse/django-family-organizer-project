@@ -44,6 +44,7 @@ SECRET_KEY = '!cxc+zaymk7#hk@+5dg)$0*v_u7cuwwcxg-dtn*g4xwi0^f$+)'
 DEBUG = False
 
 ALLOWED_HOSTS = ["familyassistance.herokuapp.com", "localhost"]
+# familyassistance.herokuapp.com", "localhost
 
 
 # Application definition
