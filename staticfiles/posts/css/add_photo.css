@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* background: #5256ad; *//*
+  background: white;
+} */
+.drag-area{
+  border: 2px dashed rgb(2, 2, 2);
+  height: 350px;
+  /* width: 300px; */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag-area.active{
+  border: 2px solid #fff;
+}
+.drag-area .icon{
+  font-size: 100px;
+  /* color: #fff; */
+  color: #5256ad;
+}
+.drag-area span{
+  font-size: 30px;
+  font-weight: 500;
+  color: #5256ad;
+}
+.drag-area span{
+  font-size: 25px;
+  font-weight: 500;
+  color: #5256ad;
+  margin: 10px 0 15px 0;
+}
+.drag-area button{
+  padding: 10px 25px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background: #5256ad;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag-area img{
+  /* height: 100%;*/
+  width: 100%; 
+  height: 300px;
+  /* width: 180px; */
+  object-fit: cover;
+  border-radius: 5px;
+}
+/*
+.file-input{
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  width: 10rem;
+  max-width: 12rem;
+  height: 10rem;
+  border: 1px dashed #4f86c3;
+
+}
+*/
+
+/* .file-input input{
+ width: 0.1px;
+ height: 0.1px;
+ opacity: 0;
+ overflow: hidden;
+ position: absolute;
+ z-index: -1;
+}
+.file-input label{
+ width: 100%;
+ height: 100%;
+ cursor: pointer;
+} */
+
+/* .file-input:hover{
+  background-color: rgb(243, 243, 225);
+}
+.file-input:active{
+ border: 1px solid #4f86c3;
+ box-shadow: inset 0 0 0 #4f86c3, 0px 10px 20px -10px #4f86c3;
+} */
+
+
+
