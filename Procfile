@@ -1,1 +1,1 @@
-web:gunicorn FamilyProject.wsgi
+web: gunicorn FamilyProject.wsgi --log-file -
