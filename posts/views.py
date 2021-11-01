@@ -120,7 +120,7 @@ def member_invite(request):
 
 def send_mail_after_registration(email, token):
   subject = 'Please Join me on family organizer Website'
-  message = F"Hi,It's a private and safe place where we can share pictures and videos and organize everyday life. https://familyassistance.pythonanywhere.com/"
+  message = F"Hi,It's a private and safe place where we can share pictures and videos and organize everyday life. https://familyassistance.herokuapp.com/"
   # message = render_to_string('accounts/email.html', {'token': token})
   email_from = settings.EMAIL_HOST_USER
   recipient_list = [email]
