@@ -43,8 +43,10 @@ SECRET_KEY = '!cxc+zaymk7#hk@+5dg)$0*v_u7cuwwcxg-dtn*g4xwi0^f$+)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["familyassistance.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ['127.0.0.1','familyassistance.herokuapp.com']
 # familyassistance.herokuapp.com", "localhost
+
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -75,7 +77,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',#hosting er jonno
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -162,8 +164,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [STATIC_DIR]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 # social project teke
 
 
@@ -184,5 +186,3 @@ EMAIL_HOST_USER = '170132.cse@student.just.edu.bd'
 EMAIL_HOST_PASSWORD = 'kjvysfyctzkwfths'
 EMAIL_PORT = 587
 
-
-django_heroku.settings(locals())

@@ -28,6 +28,9 @@ from add_todo.views import add_todo
 from add_photo.views import add_photo
 from add_location.views import add_location
 from event_calendar import views
+
+from django.views.static import serve
+from django.conf.urls import url
  
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -49,6 +52,10 @@ urlpatterns = [
     
     path('posts/', include('posts.urls')),
     path('contacts/', include('add_contact.urls')),
+
+    # Hosting er jonno
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
 ]
 
